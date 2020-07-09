@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_mode"
+            android:icon="@drawable/ic_launcher"
+            android:title="科室录入" />
+        <item
+            android:id="@+id/nav_in"
+            android:icon="@android:drawable/ic_menu_save"
+            android:title="人员录入" />
+        <item
+            android:id="@+id/nav_file"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="业务录入" />
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="信息录入" />
+    </group>
+
+</menu>
