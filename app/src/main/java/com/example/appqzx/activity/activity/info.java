@@ -101,6 +101,7 @@ public class info extends AppCompatActivity {
                 }else {
                     init();
                 }
+                content.setText(null);
             }
         });
 

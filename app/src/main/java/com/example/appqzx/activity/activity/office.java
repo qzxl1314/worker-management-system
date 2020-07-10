@@ -43,6 +43,7 @@ public class office extends AppCompatActivity {
                 }else {
                     insert(name);
                 }
+                work.setText(null);
             }
         });
         getlist();

@@ -44,6 +44,7 @@ public class work extends AppCompatActivity {
                 }else {
                     insert(name);
                 }
+                work.setText(null);
             }
         });
         getlist();

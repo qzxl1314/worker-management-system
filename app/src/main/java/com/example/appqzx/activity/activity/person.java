@@ -66,6 +66,7 @@ public class person extends AppCompatActivity {
                 }else {
                     insert(name,office1);
                 }
+                work.setText(null);
             }
         });
         getlist();
