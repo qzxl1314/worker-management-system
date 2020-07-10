@@ -51,8 +51,8 @@ public class personada extends BaseAdapter {
         } else {
             viewHolder = (personada.ViewHolder) view.getTag();
         }
-        viewHolder.mTextView.setText(mList.get(i)[0]);
-        viewHolder.getmTextView1.setText(mList.get(i)[1]);
+        viewHolder.mTextView.setText("员工姓名:"+mList.get(i)[0]);
+        viewHolder.getmTextView1.setText("部门名:"+mList.get(i)[1]);
         viewHolder.mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
