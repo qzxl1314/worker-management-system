@@ -1,6 +1,9 @@
 package com.example.appqzx.activity.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -180,10 +183,34 @@ public class MainActivity extends AppCompatActivity
         //ListView item 中的删除按钮的点击事件
         adapter.setOnItemDeleteClickListener(new MyAdapter.onItemDeleteListener() {
             @Override
-            public void onDeleteClick(int i) {
-                String id=data.get(i)[5];
-                delete(id);
-                queryinfo(officename,workname,personname,datetime);
+            public void onDeleteClick(final int i) {
+                Dialog dialog = new AlertDialog.Builder(MainActivity.this)
+
+                        .setTitle("删除信息？")  // 创建标题
+
+                        .setMessage("您确定要删除这条信息吗？")    //表示对话框的内容
+
+                        .setIcon(R.drawable.ic_launcher) //设置LOGO
+
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+
+                        }).setPositiveButton("删除", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                String id=data.get(i)[5];
+                                delete(id);
+                                queryinfo(officename,workname,personname,datetime);
+
+                            }
+
+                        }).create();  //创建对话框
+
+                dialog.show();  //显示对话框
+
             }
         });
         }
@@ -338,7 +365,7 @@ public class MainActivity extends AppCompatActivity
             }
             case 2: {
                 //创建游标
-                Cursor mCursor = sqldb.query("work", null, null, null, null, null,
+                Cursor mCursor = sqldb.query("work", null, null,null, null, null,
                         null);
                 //游标置顶
                 mCursor.moveToFirst();
@@ -353,7 +380,7 @@ public class MainActivity extends AppCompatActivity
             }
             case 3: {
                 //创建游标
-                Cursor mCursor = sqldb.query("persom", null, null, null, null, null,
+                Cursor mCursor = sqldb.query("persom", null, "office_name=?", new String[]{officename}, null, null,
                         null);
                 //游标置顶
                 mCursor.moveToFirst();
@@ -374,7 +401,7 @@ public class MainActivity extends AppCompatActivity
         data.clear();
         sqldb = dbhelper.getReadableDatabase();
         //创建游标
-            Cursor mCursor = sqldb.query("info", null, "office_name=? or person_name=? or work_name=? or info_time=?", new String[]{office,person,work,date}, null, null,
+            Cursor mCursor = sqldb.query("info", null, "office_name=? or person_name=? or work_name=? and info_time=?", new String[]{office,person,work,date}, null, null,
                     null);
             //游标置顶
             mCursor.moveToFirst();

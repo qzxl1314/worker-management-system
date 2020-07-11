@@ -1,6 +1,9 @@
 package com.example.appqzx.activity.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -145,10 +148,33 @@ public class person extends AppCompatActivity {
         //ListView item 中的删除按钮的点击事件
         adapter.setOnItemDeleteClickListener(new personada.onItemDeleteListener() {
             @Override
-            public void onDeleteClick(int i) {
-                String work_name=data.get(i)[0];
-                delete(work_name);
-                getlist();
+            public void onDeleteClick(final int i) {
+                Dialog dialog = new AlertDialog.Builder(person.this)
+
+                        .setTitle("删除信息？")  // 创建标题
+
+                        .setMessage("您确定要删除这条信息吗？")    //表示对话框的内容
+
+                        .setIcon(R.drawable.ic_launcher) //设置LOGO
+
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+
+                        }).setPositiveButton("删除", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                String work_name=data.get(i)[0];
+                                delete(work_name);
+                                getlist();
+                            }
+
+                        }).create();  //创建对话框
+
+                dialog.show();  //显示对话框
+
             }
         });
 
