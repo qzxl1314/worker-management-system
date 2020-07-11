@@ -380,7 +380,7 @@ public class MainActivity extends AppCompatActivity
             }
             case 3: {
                 //创建游标
-                Cursor mCursor = sqldb.query("persom", null, "office_name=?", new String[]{officename}, null, null,
+                Cursor mCursor = sqldb.query("persom", null, null, null, null, null,
                         null);
                 //游标置顶
                 mCursor.moveToFirst();
@@ -399,9 +399,39 @@ public class MainActivity extends AppCompatActivity
     }
     public void queryinfo(String office, String work, String person,String date){
         data.clear();
+        String selectioj="";
+        LinkedList<String> arg=new LinkedList<>();
+        if (office!=""){
+            selectioj+="office_name=?";
+            arg.add(office);
+        }
+        if (person!="") {
+            if (!selectioj.isEmpty())
+                selectioj+=" and ";
+            selectioj += "person_name=?";
+            arg.add(person);
+        }
+        if (work!="") {
+            if (!selectioj.isEmpty())
+                selectioj+=" and ";
+            selectioj += "work_name=?";
+            arg.add(work);
+        }
+        if (date!="") {
+            if (!selectioj.isEmpty())
+                selectioj+=" and ";
+            selectioj += "info_time=?";
+            arg.add(date);
+        }
+        String[] a=new String[arg.size()];
+        for (int i=0;i<arg.size();i++){
+            a[i]=arg.get(i);
+        }
+        System.out.println(office+work+person+"asd");
+        System.out.println(selectioj+"asd");
         sqldb = dbhelper.getReadableDatabase();
         //创建游标
-            Cursor mCursor = sqldb.query("info", null, "office_name=? or person_name=? or work_name=? and info_time=?", new String[]{office,person,work,date}, null, null,
+            Cursor mCursor = sqldb.query("info", null, selectioj, a, null, null,
                     null);
             //游标置顶
             mCursor.moveToFirst();
