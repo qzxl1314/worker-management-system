@@ -1,9 +1,9 @@
 package com.example.appqzx.activity.classtool;
 
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ListAdapter;
+        import android.widget.ListView;
 
 public class Utility {
     public static void setListViewHeightBasedOnChildren(ListView listView) {

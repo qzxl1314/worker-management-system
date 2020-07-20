@@ -168,6 +168,7 @@ public class info extends AppCompatActivity {
 
         //执行插入操作
         sqldb.insert("info", null, values);
+
         queryinfoall();
     }
     public String query(String person){
